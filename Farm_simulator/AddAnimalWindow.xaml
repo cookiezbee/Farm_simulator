@@ -1,0 +1,39 @@
+﻿<Window x:Class="Farm_simulator.AddAnimalWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Farm_simulator"
+        mc:Ignorable="d"
+        Title="Add Animal" Height="256" Width="300" Icon="Image/animal.ico">
+    <StackPanel Margin="10">
+        <TextBlock Text="Select Animal Type" FontSize="16" FontWeight="Bold" Margin="5"/>
+        <ComboBox x:Name="AnimalTypeComboBox" Margin="5" Height="60">
+            <ComboBoxItem Tag="Chicken">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="Image/chicken_icon.png" Width="40" Height="40" Margin="5"/>
+                    <TextBlock Text="Chicken - $30" VerticalAlignment="Center" Margin="5"/>
+                </StackPanel>
+            </ComboBoxItem>
+
+            <ComboBoxItem Tag="Cow">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="Image/cow_icon.png" Width="40" Height="40" Margin="5"/>
+                    <TextBlock Text="Cow - $60" VerticalAlignment="Center" Margin="5"/>
+                </StackPanel>
+            </ComboBoxItem>
+
+            <ComboBoxItem Tag="Sheep">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="Image/sheep_icon.png" Width="40" Height="40" Margin="5"/>
+                    <TextBlock Text="Sheep - $90" VerticalAlignment="Center" Margin="5"/>
+                </StackPanel>
+            </ComboBoxItem>
+        </ComboBox>
+
+        <TextBlock Text="Name" FontSize="14" FontWeight="Bold" Margin="5"/>
+        <TextBox x:Name="NameTextBox" Margin="5"/>
+
+        <Button Content="Add Animal" Margin="10" Click="AddAnimalButton_Click" HorizontalAlignment="Center" Padding="10,5"/>
+    </StackPanel>
+</Window>

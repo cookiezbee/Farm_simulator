@@ -1,0 +1,121 @@
+﻿<Window x:Class="Farm_simulator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Farm_simulator"
+        mc:Ignorable="d"
+        Title="Farm simulator" Height="707" Width="600" ResizeMode="NoResize" Icon="Image/favicon.ico">
+
+    <Grid>
+        <DockPanel LastChildFill="True">
+            
+            <!-- Верхняя панель -->
+            <Grid DockPanel.Dock="Top" Background="#b2b0a1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Image Source="Image/logo.png" Width="200" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0"/>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="2">
+                    <Button Content="Add Animal" Width="100" Margin="15" Click="AddAnimal_Click"/>
+                    <Button Content="Add Plant" Width="100" Margin="15" Click="AddPlant_Click"/>
+                    <Button Content="Shop" Width="100" Margin="15" Click="Shop_Click"/>
+                </StackPanel>
+            </Grid>
+
+            <!-- Нижняя панель -->
+            <Grid DockPanel.Dock="Bottom" Background="#b2b0a1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Корм -->
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="10" Grid.Column="0">
+                    <StackPanel Orientation="Vertical" Margin="3">
+                        <Image Width="30" Height="30" Source="Image/wheat_icon.png"/>
+                        <TextBlock x:Name="WheatCountTextBlock" Text="0" Margin="1" HorizontalAlignment="Center" Foreground="#40552e"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" Margin="15, 3, 3, 3">
+                        <Image Width="30" Height="30" Source="Image/corn_icon.png"/>
+                        <TextBlock x:Name="CornCountTextBlock" Text="0" Margin="1" HorizontalAlignment="Center" Foreground="#40552e"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" Margin="15, 3, 3, 3">
+                        <Image Width="30" Height="30" Source="Image/carrot_icon.png"/>
+                        <TextBlock x:Name="CarrotCountTextBlock" Text="0" Margin="1" HorizontalAlignment="Center" Foreground="#40552e"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <!-- Бюджет -->
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Margin="10">
+                    <Image Width="30" Height="30" Source="Image/money_icon.png"/>
+                    <TextBlock x:Name="MoneyCountTextBlock" Text="0" Margin="1" HorizontalAlignment="Center" Foreground="#40552e"/>
+                </StackPanel>
+
+                <!-- Производство -->
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10" Grid.Column="2">
+                    <StackPanel Orientation="Vertical" Margin="3">
+                        <Image Width="30" Height="30" Source="Image/egg_icon.png"/>
+                        <TextBlock x:Name="EggCountTextBlock" Text="0" Margin="1" HorizontalAlignment="Center" Foreground="#40552e"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" Margin="15, 3, 3, 3">
+                        <Image Width="30" Height="30" Source="Image/milk_icon.png"/>
+                        <TextBlock x:Name="MilkCountTextBlock" Text="0" Margin="1" HorizontalAlignment="Center" Foreground="#40552e"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" Margin="15, 3, 3, 3">
+                        <Image Width="30" Height="30" Source="Image/wool_icon.png"/>
+                        <TextBlock x:Name="WoolCountTextBlock" Text="0" Margin="1" HorizontalAlignment="Center" Foreground="#40552e"/>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+
+            <!-- Основная часть окна -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" Background="#FFF4F9FF" Margin="0">
+                    <TextBlock Text="Animals" FontWeight="Bold" Margin="70, 5, 5, 5" HorizontalAlignment="Left"/>
+                    <ListBox x:Name="AnimalsListBox" Margin="7, 5, 5, 5" Height="200" Width="170" HorizontalAlignment="Left" SelectionChanged="AnimalsListBox_SelectionChanged">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" ToolTip="{Binding TooltipText}">
+                                    <Image Source="{Binding CurrentIconPath}" Width="30" Height="30" Margin="5,0,5,0"/>
+                                    <TextBlock Text="{Binding Name}" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <Button Content="Feed Selected Animal" Width="170" Margin="7, 5, 5, 5" HorizontalAlignment="Left" Click="FeedAnimal_Click"/>
+
+                    <TextBlock Text="Plants" FontWeight="Bold" Margin="70, 5, 5, 5" HorizontalAlignment="Left"/>
+                    <ListBox x:Name="PlantsListBox" Margin="7, 5, 5, 5" Height="200" Width="170" HorizontalAlignment="Left">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" ToolTip="{Binding TooltipText}">
+                                    <Image Source="{Binding IconPath}" Width="30" Height="30" Margin="5,0,5,0"/>
+                                    <TextBlock Text="{Binding Name}" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <Button Content="Harvest Selected Plant" Width="170" Margin="7, 5, 5, 5" HorizontalAlignment="Left" Click="HarvestPlant_Click"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Margin="0,0,0,0" Background="#FFF4F9FF">
+                    <TextBlock Text="Details" FontSize="18" FontWeight="Bold" Margin="10"/>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="10" Height="472">
+                        <TextBlock x:Name="DetailsTextBlock" TextWrapping="Wrap" Background="#FFF"/>
+                    </ScrollViewer>
+                </StackPanel>
+            </Grid>
+        </DockPanel>
+    </Grid>
+</Window>
